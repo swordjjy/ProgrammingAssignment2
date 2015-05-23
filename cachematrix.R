@@ -18,10 +18,10 @@ set <- function(y){
 get <- function() x;
 
  
-setinverse <- function(inv) inverse <<-inv;
+setinverse <- function(inv) invM <<-inv;
 
 ##Get the cached inverse matrix
-getinverse <- function() inverse;
+getinverse <- function() invM;
 
 
 return(list(set = set,get = get, setinverse = setinverse, getinverse = getinverse))
@@ -34,19 +34,19 @@ return(list(set = set,get = get, setinverse = setinverse, getinverse = getinvers
 cacheSolve <- function(x, ...) {
 ## Return a matrix that is the inverse of 'x'
 
-inv <- x$getinv()
+invM <- x$getinv()
 
 ##Return the inverse if it has been cached
-if(!is.null(inv)){
+if(!is.null(invM)){
 message("Getting the cached inverse")
-return(inv)
+return(invM)
 }
 
 ##Otherwise, calculate and cache the inverse 
 m <- x$get()
-inverse <- solve(m,...)
-x$setinverse(inverse)
+invM <- solve(m,...)
+x$setinverse(invM)
 
-return(inverse)
+return(invM)
 
 }
